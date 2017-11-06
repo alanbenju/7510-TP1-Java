@@ -2,6 +2,7 @@ package ar.uba.fi.tdd.rulogic.model;
 
 import static org.mockito.MockitoAnnotations.initMocks;
 
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +12,9 @@ public class KnowledgeBaseTest {
 
 	@InjectMocks
 	private KnowledgeBase knowledgeBase;
+	public  KnowledgeBaseTest(){
+	    knowledgeBase = new KnowledgeBase();
+    }
 
 	@Before
 	public void setUp() throws Exception {
