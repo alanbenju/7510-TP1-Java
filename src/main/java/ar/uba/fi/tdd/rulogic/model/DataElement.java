@@ -1,6 +1,5 @@
 package ar.uba.fi.tdd.rulogic.model;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 
 /**
@@ -12,9 +11,8 @@ public class DataElement {
     private boolean isRule=false;
 
     public DataElement(String data){
-        this.text = String.join("",data.split(" "));
-        this.name = data.split("(")[0];
-
+        this.text = String.join("",data.split(" ")).replace(".","");
+        this.name = data.split("\\(")[0].replace(" ","");
         this.checkIfRule();
     }
 
@@ -29,6 +27,8 @@ public class DataElement {
 
     public ArrayList<DataElement> getFacts(DataElement query){
         //ToDo
+        System.out.println(query.getText()+" CON "+this.text);
+
 
         return new ArrayList();
     }
@@ -37,9 +37,12 @@ public class DataElement {
         return this.name;
     }
 
+    public String getText(){
+        return this.text;
+    }
+
     public boolean isEqual(DataElement query){
-        //ToDo
-        return true;
+        return query.getText().equals(this.text);
     }
 
     public boolean incorrect(){

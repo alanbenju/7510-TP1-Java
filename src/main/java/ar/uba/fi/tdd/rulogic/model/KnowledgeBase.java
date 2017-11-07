@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.stream.Collectors;
 
 
@@ -18,21 +19,23 @@ public class KnowledgeBase {
 		facts = new Hashtable();
 		rules = new Hashtable();
         names = new Hashtable();
-        try {
+        parseDB();
+        /*try {
             parseDB();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
-	private void parseDB() throws Exception {
+	private void parseDB() /*throws Exception*/ {
 		String db = getBdFile("rules.db");
-        String[] dbList = db.split("\\./n");
+        db = db.replace("\n", "").replace("\r", "");
+        String[] dbList = db.split("\\.");
         DataElement data;
 		for (int i = 0;i < dbList.length;i++){
             data = new DataElement(dbList[i]);
             if (data.incorrect()){
-                throw new Exception("Incorrect database: "+dbList[i]);
+                //throw new Exception("Incorrect database: "+dbList[i]);
             }
             if (data.isRule()) this.rules.put(data.getName(),data);
             else this.addFact(data);
@@ -42,7 +45,7 @@ public class KnowledgeBase {
 
 
 	private void addFact(DataElement data){
-	    if (!this.rules.containsKey(data.getName())) this.facts.put(data.getName(),new ArrayList<>());
+	    if (!this.rules.containsKey(data.getName())) this.facts.put(data.getName(),new ArrayList());
         this.facts.get(data.getName()).add(data);
     }
 
@@ -59,12 +62,24 @@ public class KnowledgeBase {
         return result;
 	}
 
-	public boolean answer(String query) throws Exception {
+	public boolean answer(String query) {
 	    DataElement data = new DataElement(query);
-		boolean nameExist = this.names.containsKey(data.getName());
-        if (!nameExist) return false;
 
-        ArrayList<DataElement> factsToCheck = new ArrayList<>();
+        /*Set<String> keys = this.names.keySet();
+        Iterator<String> itr = keys.iterator();
+
+        while (itr.hasNext()) {
+            // Getting Key
+            String str = itr.next();
+            System.out.println("Key: "+str+" & Value: "+this.names.get(str));
+        }*/
+
+        boolean nameExist = this.names.containsKey(data.getName());
+        System.out.println("ANTES DEL RETURN");
+        if (!nameExist) return false;
+        System.out.println("POST RETURN FALSE");
+
+        ArrayList<DataElement> factsToCheck = new ArrayList();
 
         if (data.isRule() && this.rules.containsKey(data.getName())){
             DataElement rule = this.rules.get(data.getName());
@@ -73,18 +88,33 @@ public class KnowledgeBase {
         else{
             factsToCheck.add(data);
         }
+        System.out.println("ANTES DE CHECKFACTS");
         return checkFacts(factsToCheck);
 
 	}
 
 	private boolean checkFacts(ArrayList<DataElement> factsToCheck){
 
-        /*Iterator<DataElement> elementsIterator = this.elements.iterator();
-        while(elementsIterator.hasNext()){
+        Iterator<DataElement> elementsIterator = factsToCheck.iterator();
+        boolean result = true;
+        while(elementsIterator.hasNext() && result){
             DataElement element = elementsIterator.next();
+            result = this.checkOneFact(element);
+        }
 
-        }*/
+        System.out.println("FIN "+result);
 	    return true;
+    }
+
+    private boolean checkOneFact(DataElement element){
+        ArrayList<DataElement> posibleFacts = this.facts.get(element.getName());
+        Iterator<DataElement> elementsIterator = posibleFacts.iterator();
+        boolean result = false;
+        while(elementsIterator.hasNext()){
+            DataElement posibleElement = elementsIterator.next();
+            result = posibleElement.isEqual(element);
+        }
+        return result;
     }
 
 }
