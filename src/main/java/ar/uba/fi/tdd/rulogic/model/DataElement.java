@@ -27,7 +27,8 @@ public class DataElement {
         return this.isRule;
     }
 
-    public ArrayList<DataElement> getFacts(){
+    public ArrayList<DataElement> getFacts(DataElement query){
+        //ToDo
 
         return new ArrayList();
     }
@@ -36,8 +37,14 @@ public class DataElement {
         return this.name;
     }
 
-    public boolean isEqual(DataElement query);
+    public boolean isEqual(DataElement query){
+        //ToDo
         return true;
+    }
+
+    public boolean incorrect(){
+        //ToDo
+        return false;
     }
 
 }
