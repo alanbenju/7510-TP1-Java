@@ -15,7 +15,9 @@ public class DataElement {
         this.name = data.split("\\(")[0].replace(" ","");
         this.checkIfRule();
     }
-
+    /*
+    * Only works for DataBase not for query
+    * */
     private void checkIfRule(){
         String[] separated = this.text.split(":-");
         this.isRule = separated.length > 1;
@@ -26,11 +28,33 @@ public class DataElement {
     }
 
     public ArrayList<DataElement> getFacts(DataElement query){
-        //ToDo
+        ArrayList<DataElement> factsToCheck = new ArrayList();
         System.out.println(query.getText()+" CON "+this.text);
+        String[] queryParams = query.getParams(query.getText());
+        String[] dataList = this.text.split(":-");
+        String[] dataParams = this.getParams(dataList[0]);
+        String[] notReadyFacts = dataList[1].replace("),",")-").split("-");
 
+        for (int i=0;i<notReadyFacts.length;i++){
+            for (int j=0;j<dataParams.length;j++){
+                notReadyFacts[i]=notReadyFacts[i].replace(dataParams[j],queryParams[j]);
+            }
+            factsToCheck.add(new DataElement(notReadyFacts[i]));
+        }
+        return factsToCheck;
+    }
 
-        return new ArrayList();
+    /*
+    *   in : hijo(varon,pepe)
+    *   out: [varon,pepe]
+     */
+    private String[] getParams(String text){
+        String params = text.split("\\(")[1].replace(")","");
+        return params.split(",");
+    }
+
+    public void changeToRule(){
+        this.isRule=true;
     }
 
     public String getName(){

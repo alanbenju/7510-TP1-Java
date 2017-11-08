@@ -23,8 +23,13 @@ public class KnowledgeBaseTest {
 
 	@Test
 	public void test() {
+        Assert.assertTrue(this.knowledgeBase.answer("hijo(juan,pepe)"));
+		Assert.assertTrue(this.knowledgeBase.answer("hija(juan,pepa)"));
+		Assert.assertTrue(this.knowledgeBase.answer("varon(juan)"));
+		Assert.assertTrue(this.knowledgeBase.answer("varon(pepe)"));
+        Assert.assertTrue(this.knowledgeBase.answer("varon(cacacacaca)"));
 
-		Assert.assertTrue(this.knowledgeBase.answer("varon (javier)."));
+		//Assert.assertTrue(this.knowledgeBase.answer("varon (javier).")); ESTO EN REALIDAD ESTA MAL
 
 	}
 

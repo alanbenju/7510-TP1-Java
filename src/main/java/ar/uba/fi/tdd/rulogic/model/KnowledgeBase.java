@@ -45,6 +45,7 @@ public class KnowledgeBase {
 
 
 	private void addFact(DataElement data){
+	    //CREO QUE ESTOY HACIEDNO MAL STO
 	    if (!this.rules.containsKey(data.getName())) this.facts.put(data.getName(),new ArrayList());
         this.facts.get(data.getName()).add(data);
     }
@@ -64,6 +65,9 @@ public class KnowledgeBase {
 
 	public boolean answer(String query) {
 	    DataElement data = new DataElement(query);
+        if (!this.names.containsKey(data.getName())) return false;
+        if (this.rules.containsKey(data.getName())) data.changeToRule();
+
 
         /*Set<String> keys = this.names.keySet();
         Iterator<String> itr = keys.iterator();
@@ -74,23 +78,18 @@ public class KnowledgeBase {
             System.out.println("Key: "+str+" & Value: "+this.names.get(str));
         }*/
 
-        boolean nameExist = this.names.containsKey(data.getName());
-        System.out.println("ANTES DEL RETURN");
-        if (!nameExist) return false;
-        System.out.println("POST RETURN FALSE");
+
+
 
         ArrayList<DataElement> factsToCheck = new ArrayList();
-
-        if (data.isRule() && this.rules.containsKey(data.getName())){
+        if (data.isRule()){
             DataElement rule = this.rules.get(data.getName());
             factsToCheck = rule.getFacts(data);
         }
         else{
             factsToCheck.add(data);
         }
-        System.out.println("ANTES DE CHECKFACTS");
         return checkFacts(factsToCheck);
-
 	}
 
 	private boolean checkFacts(ArrayList<DataElement> factsToCheck){
@@ -112,6 +111,7 @@ public class KnowledgeBase {
         boolean result = false;
         while(elementsIterator.hasNext()){
             DataElement posibleElement = elementsIterator.next();
+            System.out.println("CHECK "+posibleElement.getText()+" "+element.getText());
             result = posibleElement.isEqual(element);
         }
         return result;
