@@ -7,4 +7,6 @@ public class Fact extends DataElement {
     public Fact(String data) {
         super(data);
     }
+    public boolean isRule() {return false;}
+
 }

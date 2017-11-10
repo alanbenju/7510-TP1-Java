@@ -7,4 +7,8 @@ public class Rule extends DataElement {
     public Rule(String data) {
         super(data);
     }
+
+    public boolean isRule() {return true;}
+
+
 }

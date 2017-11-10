@@ -1,16 +1,16 @@
 package ar.uba.fi.tdd.rulogic.model;
 
-import static org.mockito.MockitoAnnotations.initMocks;
+//import static org.mockito.MockitoAnnotations.initMocks;
 
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
+//import org.mockito.InjectMocks;
 
 public class KnowledgeBaseTest {
 
-	@InjectMocks
+	//@InjectMocks
 	private KnowledgeBase knowledgeBase;
 	public  KnowledgeBaseTest(){
 	    knowledgeBase = new KnowledgeBase();
@@ -18,18 +18,13 @@ public class KnowledgeBaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		initMocks(this);
+		//initMocks(this);
 	}
 
-	@Test
+	/*@Test
 	public void test() {
-        /*pepeSonJuanTrue();
-		pepeTrue();
-		juanTrue();
-		pepeTrue();
-		menFalse();*/
 		Assert.assertFalse(this.knowledgeBase.answer("varon (javier)."));
-	}
+	}*/
 
 	@Test
 	public void pepeSonJuanTrue() {

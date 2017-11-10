@@ -17,11 +17,11 @@ public class DataElement {
     }
 
     private void init(String data){
-        this.text = parser.parseName(data);
-        this.name = parser.parseText(data);
+        parser = new Parser();
+        this.name = parser.parseName(data);
+        this.text = parser.parseText(data);
         this.checkIfRule();
     }
-
 
     /*
     * Only works for DataBase not for query
@@ -31,13 +31,12 @@ public class DataElement {
         this.isRule = separated.length > 1;
     }
 
-    public boolean isRule() {
-        return this.isRule;
+    public boolean isRule(){
+        return true;
     }
 
-    public ArrayList<DataElement> getFacts(DataElement query){
-        ArrayList<DataElement> factsToCheck = new ArrayList();
-        System.out.println(query.getText()+" CON "+this.text);
+    public ArrayList<Fact> getFacts(DataElement query){
+        ArrayList<Fact> factsToCheck = new ArrayList();
         String[] queryParams = query.getParams(query.getText());
         String[] dataList = this.text.split(":-");
         String[] dataParams = this.getParams(dataList[0]);
@@ -47,7 +46,7 @@ public class DataElement {
             for (int j=0;j<dataParams.length;j++){
                 notReadyFacts[i]=notReadyFacts[i].replace(dataParams[j],queryParams[j]);
             }
-            factsToCheck.add(new DataElement(notReadyFacts[i]));
+            factsToCheck.add(new Fact(notReadyFacts[i]));
         }
         return factsToCheck;
     }
@@ -61,9 +60,6 @@ public class DataElement {
         return params.split(",");
     }
 
-    public void changeToRule(){
-        this.isRule=true;
-    }
 
     public String getName(){
         return this.name;

@@ -11,4 +11,9 @@ public class Parser {
     public String parseText(String data) {
         return String.join("",data.split(" ")).replace(".","");
     }
+
+    public boolean isRule(String data){
+        String[] separated = data.split(":-");
+        return separated.length > 1;
+    }
 }
