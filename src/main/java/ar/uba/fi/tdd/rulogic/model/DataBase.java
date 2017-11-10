@@ -25,13 +25,19 @@ public class DataBase {
     }
     public void add(String text) {
         DataElement data;
+
         if (parser.isRule(text)) {
             data = new Rule(text);
+            //System.out.println("Rule "+text);
             this.rules.put(data.getName(),(Rule)data);
         }
         else{
+            //System.out.println("Fact "+text);
             data = new Fact(text);
             this.addFact((Fact)data);
+        }
+        if (!data.isValid()){
+            System.out.println("NO ES VALIDO "+text);
         }
         this.names.put(data.getName(),1);
     }
@@ -77,7 +83,7 @@ public class DataBase {
 
 
     private boolean checkFacts(ArrayList<Fact> factsToCheck){
-
+        if (factsToCheck.size()==0) return false;
         Iterator<Fact> elementsIterator = factsToCheck.iterator();
         boolean result = true;
         while(elementsIterator.hasNext() && result){

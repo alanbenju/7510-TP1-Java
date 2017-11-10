@@ -6,27 +6,32 @@ import java.util.ArrayList;
  * Created by alan on 05/11/17.
  */
 public class DataElement {
-    private String text;
-    private String name;
-    private boolean isRule=false;
+    protected String text;
+    protected String name;
+    protected boolean isRule=false;
 
-    private Parser parser;
+    protected Parser parser;
 
     public DataElement(String data){
         this.init(data);
     }
 
-    private void init(String data){
+    protected void init(String data){
         parser = new Parser();
         this.name = parser.parseName(data);
         this.text = parser.parseText(data);
         this.checkIfRule();
     }
 
+    public boolean isValid(){
+        System.out.printf("ENTRE ACA Y NO DEBERIA POR HERENCIA");
+        return true;
+    }
+
     /*
     * Only works for DataBase not for query
     * */
-    private void checkIfRule(){
+    protected void checkIfRule(){
         String[] separated = this.text.split(":-");
         this.isRule = separated.length > 1;
     }
@@ -41,12 +46,13 @@ public class DataElement {
         String[] dataList = this.text.split(":-");
         String[] dataParams = this.getParams(dataList[0]);
         String[] notReadyFacts = dataList[1].replace("),",")-").split("-");
-
-        for (int i=0;i<notReadyFacts.length;i++){
-            for (int j=0;j<dataParams.length;j++){
-                notReadyFacts[i]=notReadyFacts[i].replace(dataParams[j],queryParams[j]);
+        if(queryParams.length==dataParams.length){
+            for (int i=0;i<notReadyFacts.length;i++){
+                for (int j=0;j<dataParams.length;j++){
+                    notReadyFacts[i]=notReadyFacts[i].replace(dataParams[j],queryParams[j]);
+                }
+                factsToCheck.add(new Fact(notReadyFacts[i]));
             }
-            factsToCheck.add(new Fact(notReadyFacts[i]));
         }
         return factsToCheck;
     }
@@ -55,7 +61,7 @@ public class DataElement {
     *   in : hijo(varon,pepe)
     *   out: [varon,pepe]
      */
-    private String[] getParams(String text){
+    protected String[] getParams(String text){
         String params = text.split("\\(")[1].replace(")","");
         return params.split(",");
     }

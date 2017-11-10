@@ -10,5 +10,9 @@ public class Rule extends DataElement {
 
     public boolean isRule() {return true;}
 
+    public boolean isValid(){
+        return parser.isValidRule(this.text);
+    }
+
 
 }

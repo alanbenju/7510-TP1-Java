@@ -9,11 +9,23 @@ public class Parser {
     }
 
     public String parseText(String data) {
-        return String.join("",data.split(" ")).replace(".","");
+        return data.replace(".","").replace("\t","").replace(" ", "");
+        //return String.join("",data.split(" ")).replace(".","");
     }
 
     public boolean isRule(String data){
         String[] separated = data.split(":-");
         return separated.length > 1;
+    }
+
+    public Boolean isValidFact(String data) {
+        String regex = "^[a-zA-Z]*\\([a-zA-Z]+(,[a-zA-Z]*)*\\)";
+        return data.matches(regex);
+    }
+
+    public Boolean isValidRule(String data) {
+        String regex = "^[a-zA-Z]*\\([a-zA-Z]+(,[a-zA-Z]*)*\\):-[a-zA-Z]*\\([a-zA-Z]+(,[a-zA-Z]*)*\\)(,[a-zA-Z]*\\([a-zA-Z]+(,[a-zA-Z]*)*\\))*";
+        //System.out.println(data+" - "+data.matches(regex));
+        return data.matches(regex);
     }
 }

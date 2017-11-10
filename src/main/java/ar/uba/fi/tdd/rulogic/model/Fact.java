@@ -8,5 +8,8 @@ public class Fact extends DataElement {
         super(data);
     }
     public boolean isRule() {return false;}
+    public boolean isValid(){
+        return parser.isValidFact(this.text);
+    }
 
 }
