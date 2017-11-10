@@ -15,10 +15,16 @@ public class KnowledgeBase {
 	private Hashtable<String, DataElement> rules;
 	private Hashtable<String, Integer> names;
 
+    private FileReader fileReader;
+
+    private DataBase dataBase;
+
 	public KnowledgeBase(){
 		facts = new Hashtable();
 		rules = new Hashtable();
         names = new Hashtable();
+        fileReader = new FileReader();
+        dataBase = new DataBase();
         parseDB();
         /*try {
             parseDB();
@@ -28,12 +34,11 @@ public class KnowledgeBase {
     }
 
 	private void parseDB() /*throws Exception*/ {
-		String db = getBdFile("rules.db");
-        db = db.replace("\n", "").replace("\r", "");
-        String[] dbList = db.split("\\.");
+		String[] dbList = fileReader.getDataFromFile("rules.db");
         DataElement data;
 		for (int i = 0;i < dbList.length;i++){
-            data = new DataElement(dbList[i]);
+            //data = ;
+		    dataBase.add(new DataElement(dbList[i]));
             if (data.incorrect()){
                 //throw new Exception("Incorrect database: "+dbList[i]);
             }
@@ -46,8 +51,11 @@ public class KnowledgeBase {
 
 	private void addFact(DataElement data){
 	    //CREO QUE ESTOY HACIEDNO MAL STO
-	    if (!this.rules.containsKey(data.getName())) this.facts.put(data.getName(),new ArrayList());
-        this.facts.get(data.getName()).add(data);
+	    if (!this.facts.containsKey(data.getName())) this.facts.put(data.getName(),new ArrayList());
+
+        ArrayList factsArray = this.facts.get(data.getName());
+        factsArray.add(data);
+        this.facts.put(data.getName(),factsArray);
     }
 
 	private void addName(String name){
@@ -101,19 +109,22 @@ public class KnowledgeBase {
             result = this.checkOneFact(element);
         }
 
-        System.out.println("FIN "+result);
-	    return true;
+        //System.out.println("FIN "+result);
+	    return result;
     }
+
 
     private boolean checkOneFact(DataElement element){
         ArrayList<DataElement> posibleFacts = this.facts.get(element.getName());
         Iterator<DataElement> elementsIterator = posibleFacts.iterator();
         boolean result = false;
-        while(elementsIterator.hasNext()){
+        while(elementsIterator.hasNext() && !result){
             DataElement posibleElement = elementsIterator.next();
-            System.out.println("CHECK "+posibleElement.getText()+" "+element.getText());
+            //System.out.println("CHECK "+posibleElement.getText()+" "+element.getText());
             result = posibleElement.isEqual(element);
+            //System.out.println(result);
         }
+        //System.out.println("SALGO");
         return result;
     }
 

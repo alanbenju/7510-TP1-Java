@@ -10,11 +10,19 @@ public class DataElement {
     private String name;
     private boolean isRule=false;
 
+    private Parser parser;
+
     public DataElement(String data){
-        this.text = String.join("",data.split(" ")).replace(".","");
-        this.name = data.split("\\(")[0].replace(" ","");
+        this.init(data);
+    }
+
+    private void init(String data){
+        this.text = parser.parseName(data);
+        this.name = parser.parseText(data);
         this.checkIfRule();
     }
+
+
     /*
     * Only works for DataBase not for query
     * */
@@ -66,6 +74,7 @@ public class DataElement {
     }
 
     public boolean isEqual(DataElement query){
+        //System.out.println(query.getText()+" "+this.text+"="+query.getText().equals(this.text));
         return query.getText().equals(this.text);
     }
 
