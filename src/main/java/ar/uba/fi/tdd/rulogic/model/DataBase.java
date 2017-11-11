@@ -1,5 +1,8 @@
 package ar.uba.fi.tdd.rulogic.model;
 
+import ar.uba.fi.tdd.rulogic.exceptions.InvalidDataException;
+import ar.uba.fi.tdd.rulogic.exceptions.InvalidQueryException;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -23,7 +26,7 @@ public class DataBase {
         names = new Hashtable();
         parser = new Parser();
     }
-    public void add(String text) {
+    public void add(String text) throws InvalidDataException {
         DataElement data;
 
         if (parser.isRule(text)) {
@@ -37,7 +40,7 @@ public class DataBase {
             this.addFact((Fact)data);
         }
         if (!data.isValid()){
-            System.out.println("NO ES VALIDO "+text);
+            throw new InvalidDataException("Error reading database: "+text);
         }
         this.names.put(data.getName(),1);
     }
@@ -50,7 +53,7 @@ public class DataBase {
 
     }
 
-    public void newQuery(String query) {
+    public void newQuery(String query) throws InvalidQueryException {
         if (this.rules.containsKey(parser.parseName(query))) {
             this.query = new Rule(query);
             //System.out.printf("rule");
@@ -59,7 +62,8 @@ public class DataBase {
             this.query = new Fact(query);
             //System.out.printf("fact");
         }
-    }
+        if (!parser.isValidFact(query)) throw new InvalidQueryException("Error reading database: "+query);
+     }
 
     public boolean isQueryValid() {
         //ToDo

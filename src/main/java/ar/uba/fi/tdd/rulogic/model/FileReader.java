@@ -10,11 +10,15 @@ import java.util.stream.Collectors;
  */
 public class FileReader {
 
-    public FileReader(){}
+    private String fileName;
 
-    public String[] getDataFromFile(String fileName){
+    public FileReader(String filename){
+        this.fileName = filename;
+    }
+
+    public String[] getDataFromFile(){
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        InputStream is = classloader.getResourceAsStream(fileName);
+        InputStream is = classloader.getResourceAsStream(this.fileName);
 
         String result = new BufferedReader(new InputStreamReader(is))
                 .lines().collect(Collectors.joining("\n"));

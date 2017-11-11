@@ -19,6 +19,7 @@ public class Parser {
     }
 
     public Boolean isValidFact(String data) {
+        
         String regex = "^[a-zA-Z]*\\([a-zA-Z]+(,[a-zA-Z]*)*\\)";
         return data.matches(regex);
     }

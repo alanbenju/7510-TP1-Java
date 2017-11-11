@@ -1,24 +1,22 @@
 package ar.uba.fi.tdd.rulogic.model;
 
+import ar.uba.fi.tdd.rulogic.exceptions.InvalidDataException;
+import ar.uba.fi.tdd.rulogic.exceptions.InvalidQueryException;
+
 public class KnowledgeBase {
 
     private FileReader fileReader;
 
     private DataBase dataBase;
 
-	public KnowledgeBase(){
-        fileReader = new FileReader();
+	public KnowledgeBase(String filename) throws InvalidDataException {
+        fileReader = new FileReader(filename);
         dataBase = new DataBase();
         parseDB();
-        /*try {
-            parseDB();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
     }
 
-	private void parseDB() /*throws Exception*/ {
-		String[] dbList = fileReader.getDataFromFile("rules.db");
+	private void parseDB() throws InvalidDataException {
+		String[] dbList = fileReader.getDataFromFile();
 		for (int i = 0;i < dbList.length;i++){
 		    dataBase.add(dbList[i]);
 		}
@@ -26,8 +24,12 @@ public class KnowledgeBase {
 
 
 	public boolean answer(String query) {
-	    this.dataBase.newQuery(query);
-        boolean valid = this.dataBase.isQueryValid();
+		try {
+			this.dataBase.newQuery(query);
+		} catch (InvalidQueryException e) {
+			e.printStackTrace();
+		}
+		boolean valid = this.dataBase.isQueryValid();
         if (!valid) return false;
         return this.dataBase.existFactsFromQuery();
 
