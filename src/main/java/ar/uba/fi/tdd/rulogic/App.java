@@ -1,6 +1,7 @@
 package ar.uba.fi.tdd.rulogic;
 
 import ar.uba.fi.tdd.rulogic.exceptions.InvalidDataException;
+import ar.uba.fi.tdd.rulogic.exceptions.InvalidQueryException;
 import ar.uba.fi.tdd.rulogic.model.KnowledgeBase;
 
 import java.io.BufferedReader;
@@ -51,6 +52,8 @@ public class App
                     System.out.println(base.answer(s));
                 }
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InvalidQueryException e) {
                 e.printStackTrace();
             }
         }

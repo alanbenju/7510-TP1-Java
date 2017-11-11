@@ -56,13 +56,11 @@ public class DataBase {
     public void newQuery(String query) throws InvalidQueryException {
         if (this.rules.containsKey(parser.parseName(query))) {
             this.query = new Rule(query);
-            //System.out.printf("rule");
         }
         else{
             this.query = new Fact(query);
-            //System.out.printf("fact");
         }
-        if (!parser.isValidFact(query)) throw new InvalidQueryException("Error reading database: "+query);
+        if (!parser.isValidFact(this.query.getText())) throw new InvalidQueryException("Bad input : "+query);
      }
 
     public boolean isQueryValid() {
@@ -73,7 +71,7 @@ public class DataBase {
     public boolean existFactsFromQuery() {
         ArrayList<Fact> factsToCheck = new ArrayList();
         if (this.query.isRule()){
-            DataElement rule = this.rules.get(this.query.getName());
+            Rule rule = this.rules.get(this.query.getName());
             factsToCheck = rule.getFacts(this.query);
             //System.out.printf("ES UN PIOLA RULE");
         }

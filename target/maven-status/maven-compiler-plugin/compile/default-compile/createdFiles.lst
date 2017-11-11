@@ -1,6 +1,7 @@
 ar/uba/fi/tdd/rulogic/model/Parser.class
 ar/uba/fi/tdd/rulogic/model/KnowledgeBase.class
 ar/uba/fi/tdd/rulogic/model/Fact.class
+ar/uba/fi/tdd/rulogic/App.class
 ar/uba/fi/tdd/rulogic/model/DataBase.class
 ar/uba/fi/tdd/rulogic/exceptions/InvalidDataException.class
 ar/uba/fi/tdd/rulogic/exceptions/InvalidQueryException.class

@@ -23,12 +23,8 @@ public class KnowledgeBase {
 	}
 
 
-	public boolean answer(String query) {
-		try {
-			this.dataBase.newQuery(query);
-		} catch (InvalidQueryException e) {
-			e.printStackTrace();
-		}
+	public boolean answer(String query) throws InvalidQueryException {
+		this.dataBase.newQuery(query);
 		boolean valid = this.dataBase.isQueryValid();
         if (!valid) return false;
         return this.dataBase.existFactsFromQuery();

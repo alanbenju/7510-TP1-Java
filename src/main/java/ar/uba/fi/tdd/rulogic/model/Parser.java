@@ -19,11 +19,14 @@ public class Parser {
     }
 
     public Boolean isValidFact(String data) {
-        
+        //System.out.println(data);
         String regex = "^[a-zA-Z]*\\([a-zA-Z]+(,[a-zA-Z]*)*\\)";
+        //System.out.println(data.matches(regex));
         return data.matches(regex);
     }
-
+    /*
+    * important: with no spaces
+    * */
     public Boolean isValidRule(String data) {
         String regex = "^[a-zA-Z]*\\([a-zA-Z]+(,[a-zA-Z]*)*\\):-[a-zA-Z]*\\([a-zA-Z]+(,[a-zA-Z]*)*\\)(,[a-zA-Z]*\\([a-zA-Z]+(,[a-zA-Z]*)*\\))*";
         //System.out.println(data+" - "+data.matches(regex));
