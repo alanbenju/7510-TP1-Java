@@ -14,19 +14,9 @@ public class KnowledgeBaseTest {
 
 	//@InjectMocks
 	private KnowledgeBase knowledgeBase;
-    private KnowledgeBase badBase;
-	public  KnowledgeBaseTest(){
-		try {
+	public  KnowledgeBaseTest() throws InvalidDataException {
 			knowledgeBase = new KnowledgeBase("rules.db");
-		} catch (InvalidDataException e) {
-			e.printStackTrace();
-		}
-        try {
-            knowledgeBase = new KnowledgeBase("bad-rules.db");
-        } catch (InvalidDataException e) {
-            e.printStackTrace();
-        }
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {
@@ -34,15 +24,31 @@ public class KnowledgeBaseTest {
 	}
 
 	@Test
-	public void pepeSonJuanTrue() {
-        boolean result = false;
-        try {
-            result = this.knowledgeBase.answer("hijo(pepe,juan)");
-        } catch (InvalidQueryException e) {
-            e.printStackTrace();
-        }
+	public void pepeSonJuanTrue() throws InvalidQueryException {
+        boolean result = this.knowledgeBase.answer("hijo(pepe,juan)");
         Assert.assertTrue(result);
 	}
+    @Test
+    public void RuleTest1() throws InvalidQueryException {
+        boolean result = this.knowledgeBase.answer("hijo(pepe,pepa)");
+        Assert.assertTrue(!result);
+    }
+    @Test
+    public void RuleTest2() throws InvalidQueryException {
+        boolean result = this.knowledgeBase.answer("hija(maria,hector)");
+        Assert.assertTrue(result);
+    }
+    @Test
+    public void RuleTest3() throws InvalidQueryException {
+        boolean result = this.knowledgeBase.answer("hijo(pepe,juan)");
+        Assert.assertTrue(result);
+    }
+    @Test
+    public void RuleTest4() throws InvalidQueryException {
+        boolean result = this.knowledgeBase.answer("hijo(pepe,juan)");
+        Assert.assertTrue(result);
+    }
+
 
 	@Test
 	public void pepaDaughterJuanFalse() throws InvalidQueryException {
@@ -55,15 +61,36 @@ public class KnowledgeBaseTest {
 		Assert.assertTrue(result);
 	}
 	@Test
-	public void pepeTrue() throws InvalidQueryException {
+	public void factsTrue1() throws InvalidQueryException {
         boolean result =this.knowledgeBase.answer("varon(pepe)");
 		Assert.assertTrue(result);
 	}
-	@Test
-	public void menFalse() throws InvalidQueryException {
-        boolean result =this.knowledgeBase.answer("varon(cacacacaca)");
-		Assert.assertFalse(result);
-	}
+    @Test
+    public void factTrue2() throws InvalidQueryException {
+        boolean result =this.knowledgeBase.answer("varon(juan)");
+        Assert.assertTrue(result);
+    }
+    @Test
+    public void factTrue3() throws InvalidQueryException {
+        boolean result =this.knowledgeBase.answer("varon(hector)");
+        Assert.assertTrue(result);
+    }
+    @Test
+    public void factTrue4() throws InvalidQueryException {
+        boolean result =this.knowledgeBase.answer("varon(roberto)");
+        Assert.assertTrue(result);
+    }
+    @Test
+    public void factTrue5() throws InvalidQueryException {
+        boolean result =this.knowledgeBase.answer("varon(alejandro)");
+        Assert.assertTrue(result);
+    }
+    @Test
+    public void factTrue6() throws InvalidQueryException {
+        boolean result =this.knowledgeBase.answer("mujer(maria)");
+        Assert.assertTrue(result);
+    }
+
     @Test
     public void tioTrue() throws InvalidQueryException {
         boolean result =this.knowledgeBase.answer("tio(nicolas,alejandro, roberto)");
@@ -71,14 +98,8 @@ public class KnowledgeBaseTest {
     }
     @Test
     public void badQuery() {
-        boolean result = false;
-        try {
-            result = !this.knowledgeBase.answer("asdsadasdasdasdadas");
-        } catch (InvalidQueryException e) {
-            e.printStackTrace();
-        }
-
-        Assert.assertTrue(!result);
+        boolean result = !this.knowledgeBase.answer("asdsadasdasdasdadas");
+        Assert.assertTrue(result);
     }
 
 

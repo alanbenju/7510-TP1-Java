@@ -1,7 +1,6 @@
 package ar.uba.fi.tdd.rulogic.model;
 
 import ar.uba.fi.tdd.rulogic.exceptions.InvalidDataException;
-import ar.uba.fi.tdd.rulogic.exceptions.InvalidQueryException;
 
 public class KnowledgeBase {
 
@@ -22,8 +21,7 @@ public class KnowledgeBase {
 		}
 	}
 
-
-	public boolean answer(String query) throws InvalidQueryException {
+	public boolean answer(String query) {
 		this.dataBase.newQuery(query);
 		boolean valid = this.dataBase.isQueryValid();
         if (!valid) return false;

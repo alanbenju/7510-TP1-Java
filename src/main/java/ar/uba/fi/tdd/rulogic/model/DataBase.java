@@ -1,7 +1,6 @@
 package ar.uba.fi.tdd.rulogic.model;
 
 import ar.uba.fi.tdd.rulogic.exceptions.InvalidDataException;
-import ar.uba.fi.tdd.rulogic.exceptions.InvalidQueryException;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -53,18 +52,16 @@ public class DataBase {
 
     }
 
-    public void newQuery(String query) throws InvalidQueryException {
+    public void newQuery(String query) {
         if (this.rules.containsKey(parser.parseName(query))) {
             this.query = new Rule(query);
         }
         else{
             this.query = new Fact(query);
         }
-        if (!parser.isValidFact(this.query.getText())) throw new InvalidQueryException("Bad input : "+query);
      }
 
     public boolean isQueryValid() {
-        //ToDo
         return this.names.containsKey(query.getName());
     }
 
@@ -73,10 +70,8 @@ public class DataBase {
         if (this.query.isRule()){
             Rule rule = this.rules.get(this.query.getName());
             factsToCheck = rule.getFacts(this.query);
-            //System.out.printf("ES UN PIOLA RULE");
         }
         else{
-            //System.out.printf("ES UN PUTA FACT");
             factsToCheck.add((Fact)(this.query));
         }
 
@@ -90,47 +85,22 @@ public class DataBase {
         boolean result = true;
         while(elementsIterator.hasNext() && result){
             Fact element = elementsIterator.next();
-           // System.out.println("element to check with db "+element.getText());
             result = this.checkOneFact(element);
         }
 
-        //System.out.println("FIN "+result);
         return result;
     }
 
 
     private boolean checkOneFact(DataElement element){
-
-        /*Set<String> keys = this.facts.keySet();
-        Iterator<String> itr = keys.iterator();
-        while (itr.hasNext()) {
-            // Getting Key
-            String str = itr.next();
-            System.out.println("Key: "+str);
-            Iterator<Fact> elementsIterator = this.facts.get(str).iterator();
-            while(elementsIterator.hasNext()){
-                DataElement posibleElement = elementsIterator.next();
-                System.out.printf("value "+posibleElement.getText());
-            }
-        }*/
-        //System.out.printf("mi elemento "+element.getName()); //ME DEVOLVIO HIJO EL PELOTUDO
         ArrayList<Fact> posibleFacts = this.facts.get(element.getName());
         Iterator<Fact> elementsIterator = posibleFacts.iterator();
         boolean result = false;
         while(elementsIterator.hasNext() && !result){
-
             DataElement posibleElement = elementsIterator.next();
-           // System.out.printf("posible "+posibleElement.getText());
             result = posibleElement.isEqual(element);
         }
         return result;
     }
 
-
 }
-
-/*
-
-
- factsToCheck
-* */
