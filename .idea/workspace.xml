@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bb6c4313-c6e5-4945-bf6e-e7c2396e95a3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/bad-rules.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/ar/uba/fi/tdd/rulogic/model/ParserTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/ar/uba/fi/tdd/rulogic/model/RuleTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ar/uba/fi/tdd/rulogic/App.java" afterPath="$PROJECT_DIR$/src/main/java/ar/uba/fi/tdd/rulogic/App.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ar/uba/fi/tdd/rulogic/model/DataBase.java" afterPath="$PROJECT_DIR$/src/main/java/ar/uba/fi/tdd/rulogic/model/DataBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ar/uba/fi/tdd/rulogic/model/DataElement.java" afterPath="$PROJECT_DIR$/src/main/java/ar/uba/fi/tdd/rulogic/model/DataElement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ar/uba/fi/tdd/rulogic/model/KnowledgeBase.java" afterPath="$PROJECT_DIR$/src/main/java/ar/uba/fi/tdd/rulogic/model/KnowledgeBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ar/uba/fi/tdd/rulogic/model/Parser.java" afterPath="$PROJECT_DIR$/src/main/java/ar/uba/fi/tdd/rulogic/model/Parser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ar/uba/fi/tdd/rulogic/model/Rule.java" afterPath="$PROJECT_DIR$/src/main/java/ar/uba/fi/tdd/rulogic/model/Rule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/ar/uba/fi/tdd/rulogic/model/KnowledgeBaseTest.java" afterPath="$PROJECT_DIR$/src/test/java/ar/uba/fi/tdd/rulogic/model/KnowledgeBaseTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-ar.uba.fi.tdd.rulogic.model.KnowledgeBaseTest.xml" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-ar.uba.fi.tdd.rulogic.model.KnowledgeBaseTest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/surefire-reports/ar.uba.fi.tdd.rulogic.model.KnowledgeBaseTest.txt" afterPath="$PROJECT_DIR$/target/surefire-reports/ar.uba.fi.tdd.rulogic.model.KnowledgeBaseTest.txt" />
-    </list>
+    <list default="true" id="bb6c4313-c6e5-4945-bf6e-e7c2396e95a3" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -49,8 +31,8 @@
       <file leaf-file-name="KnowledgeBaseTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/ar/uba/fi/tdd/rulogic/model/KnowledgeBaseTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="68" column="40" lean-forward="true" selection-start-line="68" selection-start-column="40" selection-end-line="68" selection-end-column="40" />
+            <state relative-caret-position="344">
+              <caret line="73" column="31" lean-forward="true" selection-start-line="73" selection-start-column="31" selection-end-line="73" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -891,8 +873,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/ar/uba/fi/tdd/rulogic/model/KnowledgeBaseTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="68" column="40" lean-forward="true" selection-start-line="68" selection-start-column="40" selection-end-line="68" selection-end-column="40" />
+        <state relative-caret-position="344">
+          <caret line="73" column="31" lean-forward="true" selection-start-line="73" selection-start-column="31" selection-end-line="73" selection-end-column="31" />
           <folding />
         </state>
       </provider>
